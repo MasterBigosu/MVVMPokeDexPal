@@ -19,17 +19,17 @@
                      IsVisible="True"
                      Padding="10">
 
-                <Entry x:Name="NazwaWydatku"
+                <Entry x:Name="NazwaWydatku" Text="{Binding NazwaWydatku}"
                    Placeholder="Nazwa wydatku" />
 
-                <Entry x:Name="CenaWydatku"
+                <Entry x:Name="CenaWydatku" Text="{Binding CenaWydatku}"
                    Placeholder="Cena wydatku"
                    Keyboard="Numeric" />
 
-                <DatePicker x:Name="Data"
+                <DatePicker x:Name="Data" 
                         Format="dd.MM.yyyy" />
 
-                <Button Text="Dodaj Wydatek"
+                <Button Text="Dodaj Wydatek" Command="{Binding addNewKosztCommand}"
                     />
             </StackLayout>
 
@@ -39,28 +39,25 @@
                Margin="0,20,0,10" />
 
             <!-- Lista wydatków -->
-            <ListView x:Name="ExpensesListView"
-                  HasUnevenRows="True"
-                  ItemsSource="{Binding Expenses}">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="ExpensesListView"
+                  
+                  ItemsSource="{Binding KosztyModels}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
                             <StackLayout Orientation="Horizontal"
                                      Padding="10">
                                 <Label Text="{Binding Name}" />
                                 <Label Text=" - " />
                                 <Label Text="{Binding Price}" />
                                 <Label Text=" zł - " />
-                                <Label Text="{Binding Date}" />
-                                <Button Text="🗑" HorizontalOptions="EndAndExpand"
-                                    BackgroundColor="Transparent"
-                                    TextColor="Red" />
+                                
                                     
                             </StackLayout>
-                        </ViewCell>
+                        
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
