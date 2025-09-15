@@ -1,25 +1,38 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
-namespace MVVMPokeDexPal.ViewModel
+namespace YourApp.ViewModels
 {
-    public static class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
-        public static MauiApp CreateMauiApp()
+        private string _message = "Witaj z ViewModelu!";
+
+        public string Message
         {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
+            get => _message;
+            set
+            {
+                if (_message != value)
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
-
-            return builder.Build();
+                    _message = value;
+                    OnPropertyChanged();
+                }
+            }
         }
+
+        public ICommand ChangeMessageCommand { get; }
+
+        public MainViewModel()
+        {
+            ChangeMessageCommand = new Command(() =>
+            {
+                Message = "Wiadomość została zmieniona!";
+            });
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
