@@ -1,4 +1,6 @@
-﻿namespace MVVMPokeDexPal
+﻿using YourApp.ViewModels;
+
+namespace MVVMPokeDexPal
 {
     public partial class MainPage : ContentPage
     {
