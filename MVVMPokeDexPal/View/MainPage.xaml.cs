@@ -7,7 +7,7 @@ namespace MVVMPokeDexPal
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel();
+            BindingContext = new ViewModel.MainViewModel();
         }
     }
 }
