@@ -17,7 +17,10 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private float cenaWydatku;
     [ObservableProperty]
-    private string data;
+    private DateTime datka;
+ 
+
+    string data;
     public MainViewModel()
     {
         kosztyModels = new ObservableCollection<KosztyModel>();
@@ -26,6 +29,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void addNewKoszt()
     {
-        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku));
+        data = datka.ToString("dd.MM.yyyy");
+        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku, data));
     }
 }
