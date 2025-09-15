@@ -1,4 +1,4 @@
-﻿using YourApp.ViewModels;
+﻿using MVVMPokeDexPal.ViewModel;
 
 namespace MVVMPokeDexPal
 {
