@@ -7,10 +7,11 @@
         <VerticalStackLayout Padding="20">
 
             <!-- Tytuł -->
-            <Label Text="PocketPal"
+            <Label Text="Pocket Pal"
                FontSize="32"
                FontAttributes="Bold"
                HorizontalOptions="Center" />
+            
 
 
             <!-- Formularz dodawania (ukryty domyślnie) -->
@@ -18,17 +19,17 @@
                      IsVisible="True"
                      Padding="10">
 
-                <Entry x:Name="ExpenseNameEntry"
+                <Entry x:Name="NazwaWydatku" Text="{Binding NazwaWydatku}"
                    Placeholder="Nazwa wydatku" />
 
-                <Entry x:Name="ExpensePriceEntry"
+                <Entry x:Name="CenaWydatku" Text="{Binding CenaWydatku}"
                    Placeholder="Cena wydatku"
                    Keyboard="Numeric" />
 
-                <DatePicker x:Name="ExpenseDatePicker"
+                <DatePicker x:Name="Data" 
                         Format="dd.MM.yyyy" />
 
-                <Button Text="Dodaj Wydatek"
+                <Button Text="Dodaj Wydatek" Command="{Binding addNewKosztCommand}"
                     />
             </StackLayout>
 
@@ -38,30 +39,25 @@
                Margin="0,20,0,10" />
 
             <!-- Lista wydatków -->
-            <ListView x:Name="ExpensesListView"
-                  HasUnevenRows="True"
-                  ItemsSource="{Binding Expenses}">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="ExpensesListView"
+                  
+                  ItemsSource="{Binding KosztyModels}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
                             <StackLayout Orientation="Horizontal"
                                      Padding="10">
                                 <Label Text="{Binding Name}" />
                                 <Label Text=" - " />
                                 <Label Text="{Binding Price}" />
                                 <Label Text=" zł - " />
-                                <Label Text="{Binding Date}" />
-                                <Button Text="🗑"
-
-                                    HorizontalOptions="EndAndExpand"
-                                    BackgroundColor="Transparent"
-                                    TextColor="Red"
-                                    CommandParameter="{Binding}" />
+                                
+                                    
                             </StackLayout>
-                        </ViewCell>
+                        
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
