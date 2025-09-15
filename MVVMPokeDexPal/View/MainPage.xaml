@@ -5,7 +5,11 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <Label Text="Bigos"></Label>
+            
+            <Label Text="Bigos">
+                ciul
+            </Label>
+            
         </VerticalStackLayout>
     </ScrollView>
 
