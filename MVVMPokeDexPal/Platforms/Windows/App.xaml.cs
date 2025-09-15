@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
-using MVVMPokeDexPal.ViewModel;
+using MVVMPokeDexPal;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

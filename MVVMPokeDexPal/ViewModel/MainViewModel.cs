@@ -1,37 +1,31 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-namespace MVVMPokeDexPal.ViewModel
+using MVVMPokeDexPal.Model;
+using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+
+namespace MVVMPokeDexPal.ViewModel;
+
+public partial class MainViewModel : ObservableObject
 {
-    public class MainViewModel : INotifyPropertyChanged
+    [ObservableProperty]
+    private ObservableCollection<KosztyModel> kosztyModels;
+    [ObservableProperty]
+    private string nazwaWydatku;
+    [ObservableProperty]
+    private float cenaWydatku;
+    [ObservableProperty]
+    private string data;
+    public MainViewModel()
     {
-        private string _message = "Witaj z ViewModelu!";
+        kosztyModels = new ObservableCollection<KosztyModel>();
+    }
 
-        public string Message
-        {
-            get => _message;
-            set
-            {
-                if (_message != value)
-                {
-                    _message = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public ICommand ChangeMessageCommand { get; }
-
-        public MainViewModel()
-        {
-            ChangeMessageCommand = new Command(() =>
-            {
-                Message = "Wiadomość została zmieniona!";
-            });
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    [RelayCommand]
+    private void addNewKoszt()
+    {
+        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku));
     }
 }
