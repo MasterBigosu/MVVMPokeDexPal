@@ -7,10 +7,11 @@
         <VerticalStackLayout Padding="20">
 
             <!-- Tytuł -->
-            <Label Text="PocketPal"
+            <Label Text="{Binding Message}"
                FontSize="32"
                FontAttributes="Bold"
                HorizontalOptions="Center" />
+            
 
 
             <!-- Formularz dodawania (ukryty domyślnie) -->
@@ -51,12 +52,10 @@
                                 <Label Text="{Binding Price}" />
                                 <Label Text=" zł - " />
                                 <Label Text="{Binding Date}" />
-                                <Button Text="🗑"
-
-                                    HorizontalOptions="EndAndExpand"
+                                <Button Text="🗑" HorizontalOptions="EndAndExpand"
                                     BackgroundColor="Transparent"
-                                    TextColor="Red"
-                                    CommandParameter="{Binding}" />
+                                    TextColor="Red" />
+                                    
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

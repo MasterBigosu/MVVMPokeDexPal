@@ -1,4 +1,5 @@
-﻿namespace MVVMPokeDexPal
+﻿
+namespace MVVMPokeDexPal
 {
     public partial class App : Application
     {

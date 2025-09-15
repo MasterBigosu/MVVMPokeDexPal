@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace YourApp.ViewModels
+namespace MVVMPokeDexPal.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
