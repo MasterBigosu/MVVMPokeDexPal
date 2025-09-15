@@ -12,7 +12,7 @@
                FontAttributes="Bold"
                HorizontalOptions="Center" />
 
-           
+
             <!-- Formularz dodawania (ukryty domyślnie) -->
             <StackLayout x:Name="AddExpenseForm"
                      IsVisible="True"
@@ -52,7 +52,7 @@
                                 <Label Text=" zł - " />
                                 <Label Text="{Binding Date}" />
                                 <Button Text="🗑"
-                                    
+
                                     HorizontalOptions="EndAndExpand"
                                     BackgroundColor="Transparent"
                                     TextColor="Red"
