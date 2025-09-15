@@ -2,7 +2,7 @@
 
 namespace MVVMPokeDexPal.ViewModel
 {
-    public static class MauiProgram
+    public static class MainViewModel
     {
         public static MauiApp CreateMauiApp()
         {
