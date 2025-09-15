@@ -7,7 +7,7 @@
         <VerticalStackLayout Padding="20">
 
             <!-- Tytuł -->
-            <Label Text="{Binding Message}"
+            <Label Text="Pocket Pal"
                FontSize="32"
                FontAttributes="Bold"
                HorizontalOptions="Center" />
@@ -19,14 +19,14 @@
                      IsVisible="True"
                      Padding="10">
 
-                <Entry x:Name="ExpenseNameEntry"
+                <Entry x:Name="NazwaWydatku"
                    Placeholder="Nazwa wydatku" />
 
-                <Entry x:Name="ExpensePriceEntry"
+                <Entry x:Name="CenaWydatku"
                    Placeholder="Cena wydatku"
                    Keyboard="Numeric" />
 
-                <DatePicker x:Name="ExpenseDatePicker"
+                <DatePicker x:Name="Data"
                         Format="dd.MM.yyyy" />
 
                 <Button Text="Dodaj Wydatek"
