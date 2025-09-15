@@ -5,9 +5,8 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            
+
             <Label Text="Bigos">
-                ciul
             </Label>
             
         </VerticalStackLayout>
