@@ -17,6 +17,7 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private float cenaWydatku;
     [ObservableProperty]
+
     private DateTime data;
     [ObservableProperty]
     private ObservableCollection<KosztyModel> filtrowaneKoszty;
@@ -24,6 +25,7 @@ public partial class MainViewModel : ObservableObject
     private DateTime today = DateTime.Today;
     [ObservableProperty]
     private float sumaFiltrowanych;
+
     public MainViewModel()
     {
         kosztyModels = new ObservableCollection<KosztyModel>();
@@ -49,5 +51,6 @@ public partial class MainViewModel : ObservableObject
             FiltrowaneKoszty.Add(koszt);
 
         SumaFiltrowanych = FiltrowaneKoszty.Sum(k => k.Price);
+
     }
 }

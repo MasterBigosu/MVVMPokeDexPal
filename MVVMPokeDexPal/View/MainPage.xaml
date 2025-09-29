@@ -26,7 +26,9 @@
                    Placeholder="Cena wydatku"
                    Keyboard="Numeric" />
 
+
                 <DatePicker x:Name="Data" Date="{Binding Data}"
+
                         Format="dd.MM.yyyy" />
 
                 <Button Text="Dodaj Wydatek" Command="{Binding addNewKosztCommand}"
@@ -46,7 +48,6 @@
                   ItemsSource="{Binding KosztyModels}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        
                             <StackLayout Orientation="Horizontal"
                                      Padding="10">
                                 <Label Text="{Binding Name}" />
