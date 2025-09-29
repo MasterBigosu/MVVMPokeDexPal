@@ -26,6 +26,6 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void addNewKoszt()
     {
-        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku));
+        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku,data));
     }
 }
