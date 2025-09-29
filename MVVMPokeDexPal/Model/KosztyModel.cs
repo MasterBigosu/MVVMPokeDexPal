@@ -10,9 +10,9 @@ namespace MVVMPokeDexPal.Model
     {
         public string Name { get; set; }
         public float Price {  get; set; }
-        public string Data { get; set; }
+        public DateTime Data { get; set; }
 
-        public KosztyModel(string name, float price, string data)
+        public KosztyModel(string name, float price, DateTime data)
         {
             Name = name;
             Price = price;
