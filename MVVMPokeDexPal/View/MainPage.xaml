@@ -26,11 +26,13 @@
                    Placeholder="Cena wydatku"
                    Keyboard="Numeric" />
 
-                <DatePicker x:Name="Data" 
+                <DatePicker x:Name="Data" Date="{Binding Data}"
                         Format="dd.MM.yyyy" />
 
                 <Button Text="Dodaj Wydatek" Command="{Binding addNewKosztCommand}"
                     />
+                <Label Text="Wydatki z dzis"/>
+                <Label Text="{Binding SumaFiltrowanych}"/>
             </StackLayout>
 
             <!-- Nagłówek listy -->
@@ -51,9 +53,8 @@
                                 <Label Text=" - " />
                                 <Label Text="{Binding Price}" />
                                 <Label Text=" zł - " />
-                                
-                                    
-                            </StackLayout>
+                                <Label Text="{Binding Data}" />
+                        </StackLayout>
                         
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

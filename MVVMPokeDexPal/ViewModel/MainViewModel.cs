@@ -17,15 +17,37 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private float cenaWydatku;
     [ObservableProperty]
-    private string data;
+    private DateTime data;
+    [ObservableProperty]
+    private ObservableCollection<KosztyModel> filtrowaneKoszty;
+    [ObservableProperty]
+    private DateTime today = DateTime.Today;
+    [ObservableProperty]
+    private float sumaFiltrowanych;
     public MainViewModel()
     {
         kosztyModels = new ObservableCollection<KosztyModel>();
+        filtrowaneKoszty = new ObservableCollection<KosztyModel>();
+        filtrujKoszty();
     }
 
     [RelayCommand]
     private void addNewKoszt()
     {
-        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku,data));
+        kosztyModels.Add(new KosztyModel(nazwaWydatku, cenaWydatku, data));
+        filtrujKoszty();
+    }
+    [RelayCommand]
+    private void filtrujKoszty()
+    {
+        var wyniki = kosztyModels
+            .Where(k => k.Data.Date == today)
+            .ToList();
+
+        FiltrowaneKoszty.Clear();
+        foreach (var koszt in wyniki)
+            FiltrowaneKoszty.Add(koszt);
+
+        SumaFiltrowanych = FiltrowaneKoszty.Sum(k => k.Price);
     }
 }
