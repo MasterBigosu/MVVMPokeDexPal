@@ -1,65 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MVVMPokeDexPal.MainPage">
+             x:Class="MVVMPokeDexPal.MainPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20">
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Tytuł -->
-            <Label Text="Pocket Pal"
-               FontSize="32"
-               FontAttributes="Bold"
-               HorizontalOptions="Center" />
-            
+            <!-- Górny pasek: Tytuł i Przycisk zmiany motywu -->
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0"
+                       Text="PocketPal"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       SemanticProperties.HeadingLevel="Level1"
+                       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
+                <Button Grid.Column="1"
+                        x:Name="ThemeToggleButton"
+                        Text="Zmień motyw" 
+                        Clicked="ThemeToggleButton_Clicked"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        CornerRadius="8"
+                        HeightRequest="44"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="{StaticResource White}"/>
+            </Grid>
 
-            <!-- Formularz dodawania (ukryty domyślnie) -->
-            <StackLayout x:Name="AddExpenseForm"
-                     IsVisible="True"
-                     Padding="10">
+            <!-- Główny layout: Formularz po lewej, lista po prawej -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,20,0,0">
 
-                <Entry x:Name="NazwaWydatku" Text="{Binding NazwaWydatku}"
-                   Placeholder="Nazwa wydatku" />
+                <!-- Kolumna 0: Formularz dodawania wydatku -->
+                <Border Grid.Column="0"
+                        Padding="15"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                        StrokeThickness="1">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
 
-                <Entry x:Name="CenaWydatku" Text="{Binding CenaWydatku}"
-                   Placeholder="Cena wydatku"
-                   Keyboard="Numeric" />
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Dodaj nowy wydatek"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               SemanticProperties.HeadingLevel="Level2"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
+                        <Entry x:Name="NazwaWydatku"
+                               Text="{Binding NazwaWydatku}"
+                               Placeholder="Nazwa wydatku (np. Kawa)"
+                               FontSize="16"
+                               HeightRequest="44"
+                               SemanticProperties.Hint="Wpisz nazwę zakupionego produktu lub usługi"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               PlaceholderColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
 
-                <DatePicker x:Name="Data" Date="{Binding Data}"
+                        <Entry x:Name="CenaWydatku"
+                               Text="{Binding CenaWydatku}"
+                               Placeholder="Cena (np. 14,50)"
+                               Keyboard="Numeric"
+                               FontSize="16"
+                               HeightRequest="44"
+                               SemanticProperties.Hint="Wpisz kwotę wydatku"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               PlaceholderColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
 
-                        Format="dd.MM.yyyy" />
+                        <DatePicker x:Name="Data"
+                                    Date="{Binding Datka}"
+                                    Format="dd.MM.yyyy"
+                                    FontSize="16"
+                                    HeightRequest="44"
+                                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
-                <Button Text="Dodaj Wydatek" Command="{Binding addNewKosztCommand}"
-                    />
-                <Label Text="Wydatki z dzis"/>
-                <Label Text="{Binding SumaFiltrowanych}"/>
-            </StackLayout>
+                        <Button Text="Dodaj Wydatek"
+                                Command="{Binding addNewKosztCommand}"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                HeightRequest="44"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="{StaticResource White}"
+                                SemanticProperties.Hint="Kliknij, aby zapisać nowy wydatek" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <!-- Nagłówek listy -->
-            <Label Text="Ostatnie wydatki"
-               FontSize="18"
-               Margin="0,20,0,10" />
+                <!-- Kolumna 1: Lista ostatnich wydatków -->
+                <VerticalStackLayout Grid.Column="1" Spacing="10">
+                    <Label Text="Ostatnie wydatki"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           SemanticProperties.HeadingLevel="Level2"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
-            <!-- Lista wydatków -->
-            <CollectionView x:Name="ExpensesListView"
-                  
-                  ItemsSource="{Binding KosztyModels}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                            <StackLayout Orientation="Horizontal"
-                                     Padding="10">
-                                <Label Text="{Binding Name}" />
-                                <Label Text=" - " />
-                                <Label Text="{Binding Price}" />
-                                <Label Text=" zł - " />
-                                <Label Text="{Binding Data}" />
-                        </StackLayout>
-                        
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    <CollectionView x:Name="ExpensesListView"
+                                    ItemsSource="{Binding KosztyModels}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="15" Margin="0,0,0,10"
+                                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                                        StrokeThickness="1">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10"/>
+                                    </Border.StrokeShape>
+
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                                        <Label Text="-" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray400}}"/>
+                                        <Label Text="{Binding Price, StringFormat='{0:C}'}" FontSize="16" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                                        <Label Text="{Binding Data}" FontSize="14" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray400}}"/>
+                                    </StackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </Grid>
 
         </VerticalStackLayout>
     </ScrollView>

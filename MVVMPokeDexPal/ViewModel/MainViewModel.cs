@@ -42,9 +42,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void filtrujKoszty()
     {
-        var wyniki = kosztyModels
-            .Where(k => k.Data.Date == today)
-            .ToList();
+        var wyniki = kosztyModels.Where(k => k.Data.Date == today).ToList();
 
         FiltrowaneKoszty.Clear();
         foreach (var koszt in wyniki)
